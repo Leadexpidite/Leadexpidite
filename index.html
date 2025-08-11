@@ -355,67 +355,84 @@
             transform: scale(1.05);
         }
         
-        /* Offer Section */
-        .offer {
+        /* Professional Services Section */
+        .professional-services {
             padding: 100px 0;
             background: linear-gradient(rgba(29, 86, 110, 0.05), rgba(29, 86, 110, 0.05));
             text-align: center;
         }
         
-        .offer h2 {
+        .professional-services h2 {
             font-size: 2.5rem;
             margin-bottom: 20px;
             color: var(--teal);
         }
         
-        .offer p.subtitle {
+        .professional-services p.subtitle {
             font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto 60px;
             color: var(--dark);
         }
         
-        .services {
+        .services-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
+            gap: 40px;
             margin-top: 50px;
         }
         
-        .service-card {
+        .service-item {
             background: white;
             border-radius: 10px;
             overflow: hidden;
-            width: 300px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            width: 350px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: var(--transition);
-            border-top: 4px solid var(--teal);
+            text-align: left;
         }
         
-        .service-card:hover {
+        .service-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
         
-        .service-icon {
-            background: var(--navy);
-            color: var(--light-teal);
-            font-size: 2.5rem;
-            padding: 30px 0;
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-item:hover .service-img img {
+            transform: scale(1.1);
         }
         
         .service-content {
-            padding: 30px;
+            padding: 25px;
         }
         
         .service-content h3 {
             margin-bottom: 15px;
             color: var(--navy);
+            font-size: 1.5rem;
         }
         
         .service-content p {
             color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .service-icon {
+            font-size: 2rem;
+            color: var(--teal);
+            margin-bottom: 15px;
         }
         
         /* Testimonials */
@@ -498,56 +515,6 @@
             font-size: 0.9rem;
             color: var(--light-gold);
             font-style: normal;
-        }
-        
-        /* Trust Badges */
-        .trust-badges {
-            padding: 60px 0;
-            background-color: var(--light);
-            text-align: center;
-        }
-        
-        .trust-badges h3 {
-            font-size: 1.8rem;
-            margin-bottom: 40px;
-            color: var(--teal);
-        }
-        
-        .badges-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .badge {
-            width: 160px;
-            height: 80px;
-            background: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            padding: 15px;
-            transition: transform 0.3s ease;
-        }
-        
-        .badge:hover {
-            transform: translateY(-5px);
-        }
-        
-        .badge img {
-            max-width: 100%;
-            max-height: 50px;
-            filter: grayscale(100%);
-            transition: filter 0.3s ease;
-        }
-        
-        .badge:hover img {
-            filter: grayscale(0);
         }
         
         /* CTA Section */
@@ -761,6 +728,31 @@
         @media (max-width: 768px) {
             nav ul {
                 display: none;
+            position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--navy);
+                flex-direction: column;
+                padding: 20px 0;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            
+            .mobile-toggle {
+                display: block;
+                font-size: 1.5rem;
+                color: white;
+                background: none;
+                border: none;
+                cursor: pointer;
             }
             
             .hero {
@@ -780,7 +772,7 @@
                 gap: 30px;
             }
             
-            .services, .proof-grid {
+            .services-container, .proof-grid {
                 flex-direction: column;
                 align-items: center;
             }
@@ -792,6 +784,10 @@
             
             .footer-container {
                 flex-direction: column;
+                gap: 30px;
+            }
+            
+            .featured-logos {
                 gap: 30px;
             }
         }
@@ -822,10 +818,18 @@
                 font-size: 2.5rem;
             }
             
-            .badge {
-                width: 130px;
-                height: 70px;
+            .featured-logo {
+                font-size: 1.4rem;
             }
+        }
+        
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -836,10 +840,13 @@
             <div class="logo">
                 <h1>Lead<span>Expidite</span></h1>
             </div>
+            <button class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
             <nav>
                 <ul>
                     <li><a href="#story">Our Story</a></li>
-                    <li><a href="#offer">Our Offer</a></li>
+                    <li><a href="#services">Services</a></li>
                     <li><a href="#testimonials">Results</a></li>
                     <li><a href="#audit" class="cta-button">Free Audit</a></li>
                 </ul>
@@ -854,7 +861,7 @@
             <p>Our proven strategies help you attract high-quality prospects and turn them into paying customers — fast.</p>
             <div class="hero-buttons">
                 <a href="#audit" class="cta-button">Get Your Free Lead Generation Audit</a>
-                <a href="#offer" class="secondary-button">Explore Our Services</a>
+                <a href="#services" class="secondary-button">Explore Our Services</a>
             </div>
         </div>
     </section>
@@ -937,70 +944,86 @@
         </div>
     </section>
 
-    <!-- Offer Section -->
-    <section class="offer" id="offer">
+    <!-- Professional Services Section -->
+    <section class="professional-services" id="services">
         <div class="container">
-            <h2>Our Premium Offer</h2>
-            <p class="subtitle">We provide end-to-end lead generation solutions designed to fill your pipeline with qualified prospects ready to buy</p>
+            <h2>Our Premium Services</h2>
+            <p class="subtitle">End-to-end lead generation solutions designed to fill your pipeline with qualified prospects</p>
             
-            <div class="services">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-bullhorn"></i>
+            <div class="services-container">
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Facebook Ads">
                     </div>
                     <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
                         <h3>High-Converting Facebook Ads</h3>
                         <p>Professionally crafted ad campaigns that target your ideal customers and drive qualified leads to your business.</p>
                     </div>
                 </div>
                 
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop"></i>
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Landing Pages">
                     </div>
                     <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
                         <h3>Conversion-Optimized Landing Pages</h3>
                         <p>Beautifully designed landing pages engineered to convert visitors into leads at industry-leading rates.</p>
                     </div>
                 </div>
                 
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-envelope"></i>
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Lead Nurturing">
                     </div>
                     <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
                         <h3>Automated Follow-Up Sequences</h3>
                         <p>Strategic email and SMS sequences that nurture leads and guide them smoothly to purchase decisions.</p>
                     </div>
                 </div>
-            </div>
-            
-            <div class="services">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-filter"></i>
+                
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Lead Qualification">
                     </div>
                     <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-filter"></i>
+                        </div>
                         <h3>Lead Qualification System</h3>
                         <p>Our proprietary system filters out low-quality leads, delivering only prospects with genuine buying intent.</p>
                     </div>
                 </div>
                 
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-chart-line"></i>
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Analytics">
                     </div>
                     <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
                         <h3>Performance Analytics</h3>
                         <p>Comprehensive reporting that shows exactly which leads are converting and where your ROI is coming from.</p>
                     </div>
                 </div>
                 
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-handshake"></i>
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Results">
                     </div>
                     <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
                         <h3>Pay Only For Results</h3>
                         <p>Our unique model ensures you only pay for leads that meet your specific qualification criteria.</p>
                     </div>
@@ -1018,11 +1041,11 @@
                     <p>"Lead Expidite transformed our business. We went from wasting thousands on unqualified leads to having a consistent pipeline of customers ready to buy. Our sales team has never been happier!"</p>
                     <div class="client">
                         <div class="client-avatar">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Reynolds">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rajesh Sharma">
                         </div>
                         <div class="client-info">
-                            <h4>Michael Reynolds</h4>
-                            <p>CEO, TechSolutions Inc.</p>
+                            <h4>Rajesh Sharma</h4>
+                            <p>CEO, TechSolutions India</p>
                         </div>
                     </div>
                 </div>
@@ -1031,11 +1054,11 @@
                     <p>"The results speak for themselves. Within 90 days of working with Lead Expidite, our sales increased by 150%. Their lead qualification system is worth its weight in gold!"</p>
                     <div class="client">
                         <div class="client-avatar">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Patel">
                         </div>
                         <div class="client-info">
-                            <h4>Sarah Johnson</h4>
-                            <p>Marketing Director, Growth Partners</p>
+                            <h4>Priya Patel</h4>
+                            <p>Marketing Director, Growth Partners Mumbai</p>
                         </div>
                     </div>
                 </div>
@@ -1044,10 +1067,10 @@
                     <p>"As a SaaS company, we struggled with lead quality. Lead Expidite's targeting system delivered 3x more qualified demos than our previous agency. Truly game-changing!"</p>
                     <div class="client">
                         <div class="client-avatar">
-                            <img src="https://randomuser.me/api/portraits/men/62.jpg" alt="David Chen">
+                            <img src="https://randomuser.me/api/portraits/men/62.jpg" alt="Amit Singh">
                         </div>
                         <div class="client-info">
-                            <h4>David Chen</h4>
+                            <h4>Amit Singh</h4>
                             <p>Founder, CloudSaaS Solutions</p>
                         </div>
                     </div>
@@ -1056,26 +1079,15 @@
         </div>
     </section>
 
-    <!-- Trust Badges -->
-    <section class="trust-badges">
+    <!-- Featured In Section -->
+    <section class="featured-section">
         <div class="container">
-            <h3>Trusted By Industry Leaders</h3>
-            <div class="badges-container">
-                <div class="badge">
-                    <img src="https://via.placeholder.com/120x40/0a192f/ffffff?text=TechCorp" alt="TechCorp">
-                </div>
-                <div class="badge">
-                    <img src="https://via.placeholder.com/120x40/0a192f/ffffff?text=GlobalInc" alt="GlobalInc">
-                </div>
-                <div class="badge">
-                    <img src="https://via.placeholder.com/120x40/0a192f/ffffff?text=InnovateX" alt="InnovateX">
-                </div>
-                <div class="badge">
-                    <img src="https://via.placeholder.com/120x40/0a192f/ffffff?text=FutureLabs" alt="FutureLabs">
-                </div>
-                <div class="badge">
-                    <img src="https://via.placeholder.com/120x40/0a192f/ffffff?text=GrowthCo" alt="GrowthCo">
-                </div>
+            <h3>Featured In</h3>
+            <div class="featured-logos">
+                <div class="featured-logo">Business Today</div>
+                <div class="featured-logo">The Economic Times</div>
+                <div class="featured-logo">Entrepreneur India</div>
+                <div class="featured-logo">Inc42</div>
             </div>
         </div>
     </section>
@@ -1117,14 +1129,14 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="budget">Monthly Marketing Budget *</label>
+                        <label for="budget">Monthly Marketing Budget (₹) *</label>
                         <select id="budget" name="budget" required>
                             <option value="">Select an option</option>
-                            <option value="<$1k">Less than $1,000</option>
-                            <option value="$1k-5k">$1,000 - $5,000</option>
-                            <option value="$5k-10k">$5,000 - $10,000</option>
-                            <option value="$10k-20k">$10,000 - $20,000</option>
-                            <option value="$20k+">$20,000+</option>
+                            <option value="<₹50k">Less than ₹50,000</option>
+                            <option value="₹50k-₹2L">₹50,000 - ₹2,00,000</option>
+                            <option value="₹2L-₹5L">₹2,00,000 - ₹5,00,000</option>
+                            <option value="₹5L-₹10L">₹5,00,000 - ₹10,00,000</option>
+                            <option value="₹10L+">₹10,00,000+</option>
                         </select>
                     </div>
                     
@@ -1170,7 +1182,7 @@
                 <ul class="footer-links">
                     <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
                     <li><a href="#story"><i class="fas fa-chevron-right"></i> Our Story</a></li>
-                    <li><a href="#offer"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    <li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
                     <li><a href="#audit"><i class="fas fa-chevron-right"></i> Free Audit</a></li>
                 </ul>
             </div>
@@ -1180,7 +1192,7 @@
                 <ul class="footer-links">
                     <li><a href="mailto:hello@leadexpidite.com"><i class="fas fa-envelope"></i> hello@leadexpidite.com</a></li>
                     <li><a href="tel:5551234567"><i class="fas fa-phone"></i> (555) 123-4567</a></li>
-                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> New York, NY</a></li>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> Mumbai, India</a></li>
                 </ul>
             </div>
         </div>
@@ -1215,6 +1227,14 @@
                 header.style.padding = '20px 0';
                 header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
             }
+        });
+
+        // Mobile menu toggle
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navMenu = document.querySelector('nav ul');
+        
+        mobileToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('show');
         });
 
         // Form submission with Formspree and validation
